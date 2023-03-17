@@ -4,7 +4,6 @@ const { genSalt } = require("bcrypt");
 const validator = require("validator");
 const Schema = mongoose.Schema;
 const jwt = require("jsonwebtoken");
-const moment = require("moment");
 const {
   sendEmailWithNodeMailer,
   sendEmailWithGoogle,
