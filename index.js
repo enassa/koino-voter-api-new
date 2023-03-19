@@ -60,7 +60,7 @@ app.use("/api/user", userRoutes);
 
 app.get("/", (req, res) => {
   console.log("DIRNAME", __dirname);
-  req.send("VKoino");
+  res.send("Hello, World!");
   // res.sendFile("./views/home.html", { root: __dirname });
 });
 // ERROR HANDLING
