@@ -47,7 +47,7 @@ connectToMongoDb();
 // allow cors
 app.use(
   cors({
-    origin: "https://koinovoter.web.app",
+    origin: "*",
   })
 );
 // Middle ware
