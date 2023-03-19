@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
 var path = require("path");
-var root = path.dirname(require.main.filename);
+// var root = path.dirname(require.main.filename);
 
 const {
   // AUTH
