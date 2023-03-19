@@ -59,6 +59,10 @@ app.use("/api/elections", electionRoutes);
 app.use("/api/user", userRoutes);
 
 app.get("/", (req, res) => {
+  if (req.method === "OPTIONS") {
+    res.status(200).end();
+    return;
+  }
   console.log("DIRNAME", __dirname);
   res.send("Hello, World!");
   // res.sendFile("./views/home.html", { root: __dirname });
