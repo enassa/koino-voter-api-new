@@ -59,7 +59,9 @@ app.use("/api/elections", electionRoutes);
 app.use("/api/user", userRoutes);
 
 app.get("/", (req, res) => {
-  res.sendFile("./views/home.html", { root: __dirname });
+  console.log("DIRNAME", __dirname);
+  req.send("VKoino");
+  // res.sendFile("./views/home.html", { root: __dirname });
 });
 // ERROR HANDLING
 app.use((error, req, res, next) => {
