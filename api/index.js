@@ -18,7 +18,7 @@ const cors = require("cors");
 const userRoutes = require("../routes/users/userRoutes");
 const organizationRoutes = require("../routes/election/electionRoutes");
 const electionRoutes = require("../routes/election/electionCRUDRoutes");
-const { createPdf, corsAcceptedUrls } = require("./constants");
+const { createPdf, corsAcceptedUrls } = require("../constants");
 const { createComplexPdf } = require("../utils/pdfMaker");
 const { count } = require("../models/election-model/electionModel");
 
@@ -41,7 +41,7 @@ require("dotenv").config();
 //   });
 // };
 // connectToMongoDb();
-const { mongPath } = require("./constants");
+const { mongPath } = require("../constants");
 mongoose.connect(mongPath);
 mongoose.Promise = global.Promise;
 // allow cors
@@ -54,12 +54,12 @@ app.use(
 app.use(express.json());
 
 // INITIALIZE ROUTES
-app.use("/api/election", organizationRoutes);
-app.use("/api/elections", electionRoutes);
-app.use("/api/user", userRoutes);
+app.use("../api/election", organizationRoutes);
+app.use("../api/elections", electionRoutes);
+app.use("../api/user", userRoutes);
 
 app.get("/", (req, res) => {
-  res.sendFile("./views/home.html", { root: __dirname });
+  res.sendFile("../views/home.html", { root: __dirname });
 });
 // ERROR HANDLING
 app.use((error, req, res, next) => {
