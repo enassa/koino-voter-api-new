@@ -44,12 +44,12 @@ connectToMongoDb();
 // const { mongPath } = require("./constants");
 // mongoose.connect(mongPath);
 // mongoose.Promise = global.Promise;
-// // allow cors
-// app.use(
-//   cors({
-//     origin: "*",
-//   })
-// );
+// allow cors
+app.use(
+  cors({
+    origin: "https://koinovoter.web.app",
+  })
+);
 // Middle ware
 app.use(express.json());
 
@@ -63,6 +63,7 @@ app.get("/", (req, res) => {
   res.send("Hello, World!");
   // res.sendFile("./views/home.html", { root: __dirname });
 });
+
 // ERROR HANDLING
 app.use((error, req, res, next) => {
   res.status(422).send({
