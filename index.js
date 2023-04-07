@@ -28,23 +28,23 @@ require("dotenv").config();
 
 // CONNECT TO MONGOOSE
 
-const mongo = require("./mongo");
-const connectToMongoDb = async () => {
-  await mongo().then((mongoose) => {
-    try {
-      console.log("Connected to mongodb");
-    } catch (err) {
-      console.log(err);
-    } finally {
-      mongoose.connection.close();
-    }
-  });
-};
+// const mongo = require("./mongo");
+// const connectToMongoDb = async () => {
+//   await mongo().then((mongoose) => {
+//     try {
+//       console.log("Connected to mongodb");
+//     } catch (err) {
+//       console.log(err);
+//     } finally {
+//       mongoose.connection.close();
+//     }
+//   });
+// };
 connectToMongoDb();
 app.use(express.json());
-// const { mongPath } = require("./constants");
-// mongoose.connect(mongPath);
-// mongoose.Promise = global.Promise;
+const { mongPath } = require("./constants");
+mongoose.connect(mongPath);
+mongoose.Promise = global.Promise;
 // allow cors
 app.options("*", cors());
 
