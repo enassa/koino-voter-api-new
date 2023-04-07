@@ -114,7 +114,7 @@ const clientBaseUrl =
     ? "https://koinovoter.web.app"
     : "http://localhost:3000";
 
-const password = "PdRuayEfXYBTsi7b";
+const password = "j8kwS3JL0fl5ZZmI";
 const mongPath =
   process.env.NODE_ENV === "production"
     ? `mongodb+srv://enassan:${password}@koinovote.ww6hvut.mongodb.net/?retryWrites=true&w=majority`
