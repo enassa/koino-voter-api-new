@@ -117,7 +117,7 @@ const clientBaseUrl =
 const password = "j8kwS3JL0fl5ZZmI";
 const mongPath =
   process.env.NODE_ENV === "production"
-    ? `mongodb+srv://enassan:${password}@koinovote.ww6hvut.mongodb.net/?retryWrites=true&w=majority`
+    ? `mongodb+srv://vercel-admin-user:${password}@koinovote.ww6hvut.mongodb.net/?retryWrites=true&w=majority`
     : `mongodb://127.0.0.1:27017/`;
 
 module.exports = {
