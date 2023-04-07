@@ -43,7 +43,8 @@ require("dotenv").config();
 // connectToMongoDb();
 app.use(express.json());
 const { mongPath } = require("./constants");
-mongoose.connect(mongPath);
+const connection = mongoose.connect(mongPath);
+console.log(connection);
 mongoose.Promise = global.Promise;
 // allow cors
 app.options("*", cors());
