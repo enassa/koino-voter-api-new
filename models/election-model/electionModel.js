@@ -69,7 +69,14 @@ OrgSchema.statics.register = async function (
   contact,
   portNumber
 ) {
-  console.log("reached register functions");
+  console.log(
+    "reached register functions",
+    email,
+    password,
+    orgName,
+    contact,
+    portNumber
+  );
   // Validation
   if (!email || !password || !orgName) {
     throw Error("All fields are required");
@@ -125,7 +132,15 @@ OrgSchema.statics.register = async function (
     `${getHtmlBody(election, resetUrl, "Confirm your email acount")}`
     // election.orgName
   );
-
+  console.log(
+    "reached end",
+    email,
+    password,
+    orgName,
+    contact,
+    portNumber,
+    election
+  );
   return election;
 };
 
