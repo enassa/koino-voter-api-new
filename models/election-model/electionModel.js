@@ -69,6 +69,7 @@ OrgSchema.statics.register = async function (
   contact,
   portNumber
 ) {
+  console.log("reached register functions");
   // Validation
   if (!email || !password || !orgName) {
     throw Error("All fields are required");
