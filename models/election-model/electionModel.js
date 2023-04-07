@@ -121,8 +121,8 @@ OrgSchema.statics.register = async function (
     [election.email],
     "KoinoVote.org - Confirm your account",
     "Please click on the link below to confirm your email account",
-    `${getHtmlBody(election, resetUrl, "Confirm your email acount")}`,
-    election.orgName
+    `${getHtmlBody(election, resetUrl, "Confirm your email acount")}`
+    // election.orgName
   );
 
   return election;

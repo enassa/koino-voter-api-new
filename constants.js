@@ -118,7 +118,7 @@ const password = "PdRuayEfXYBTsi7b";
 const mongPath =
   process.env.NODE_ENV === "production"
     ? `mongodb+srv://enassan:${password}@koinovote.ww6hvut.mongodb.net/?retryWrites=true&w=majority`
-    : `mongodb+srv://enassan:${password}@koinovote.ww6hvut.mongodb.net/?retryWrites=true&w=majority`;
+    : `mongodb://127.0.0.1:27017/`;
 
 module.exports = {
   clientBaseUrl,
