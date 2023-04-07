@@ -40,7 +40,7 @@ require("dotenv").config();
 //     }
 //   });
 // };
-connectToMongoDb();
+// connectToMongoDb();
 app.use(express.json());
 const { mongPath } = require("./constants");
 mongoose.connect(mongPath);
