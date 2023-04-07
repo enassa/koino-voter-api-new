@@ -1,16 +1,3 @@
-// const mongo = require("./mongo");
-// const connectToMongoDb = async () => {
-//   await mongo().then((mongoose) => {
-//     try {
-//       console.log("Connected to mongodb");
-//     } catch (err) {
-//       console.log(err);
-//     } finally {
-//       mongoose.connection.close();
-//     }
-//   });
-// };
-// connectToMongoDb();
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
@@ -41,25 +28,17 @@ require("dotenv").config();
 //   });
 // };
 // connectToMongoDb();
-app.use(express.json());
 const { mongPath } = require("./constants");
-const connection = mongoose.connect(mongPath);
-await connection
-  .then((res) => {
-    console.log(res, "mongoose connection");
-  })
-  .catch((err) => {
-    console.log("connection err", err);
-  })
-  .finally((finalResults) => {
-    console.log("done with all", finalResults);
-  });
-// console.log(connection);
+mongoose.connect(mongPath);
 mongoose.Promise = global.Promise;
 // allow cors
-app.options("*", cors());
-
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 // Middle ware
+app.use(express.json());
 
 // INITIALIZE ROUTES
 app.use("/api/election", organizationRoutes);
@@ -67,11 +46,8 @@ app.use("/api/elections", electionRoutes);
 app.use("/api/user", userRoutes);
 
 app.get("/", (req, res) => {
-  console.log("DIRNAME index", __dirname);
-  res.send("Hello, World from index!");
-  // res.sendFile("./views/home.html", { root: __dirname });
+  res.sendFile("./views/home.html", { root: __dirname });
 });
-
 // ERROR HANDLING
 app.use((error, req, res, next) => {
   res.status(422).send({
@@ -86,9 +62,7 @@ app.use((error, req, res, next) => {
 // LISTEN FOR ROUTES
 let counts = 0;
 const listener = app.listen(process.env.PORT || "3030", (req, res) => {
-  // createComplexPdf(["fdfdf", "fdsfsd", "dfdsfsds"], `name${counts}`) ;
-  console.log(
-    `now listening from index at port ${listener.address().port || "3030"}`
-  );
+  // createComplexPdf(["fdfdf", "fdsfsd", "dfdsfsds"], `name${counts}`);
+  console.log(`now listening at port ${listener.address().port || "3030"}`);
   counts++;
 });
