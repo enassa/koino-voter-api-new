@@ -44,7 +44,17 @@ require("dotenv").config();
 app.use(express.json());
 const { mongPath } = require("./constants");
 const connection = mongoose.connect(mongPath);
-console.log(connection);
+await connection
+  .then((res) => {
+    console.log(res, "mongoose connection");
+  })
+  .catch((err) => {
+    console.log("connection err", err);
+  })
+  .finally((finalResults) => {
+    console.log("done with all", finalResults);
+  });
+// console.log(connection);
 mongoose.Promise = global.Promise;
 // allow cors
 app.options("*", cors());

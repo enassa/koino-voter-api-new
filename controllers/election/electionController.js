@@ -10,6 +10,14 @@ const createToken = (_id) => {
 
 const signUpUser = async (req, res) => {
   const { email, password, orgName, contact } = req.body;
+  console.log(
+    "constroller",
+    email,
+    password,
+    orgName,
+    contact,
+    req.socket.localPort
+  );
   try {
     const election = await OrgSchema.register(
       email,
