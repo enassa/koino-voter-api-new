@@ -61,7 +61,7 @@ const sendEmailWithNodeMailer = async (
 };
 // console.log(JSON.stringifsy(a));
 const CREDENTIALS = require("../../config/api-variables");
-const sendEmailWithGoogle = function (
+const sendEmailWithGoogle = async function (
   port,
   host,
   senderEmail,
@@ -132,7 +132,7 @@ const sendEmailWithGoogle = function (
       throw Error(error.message);
     }
   };
-  sendMail()
+  await sendMail()
     .then((res) => {
       console.log(res);
     })

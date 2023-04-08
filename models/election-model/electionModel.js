@@ -233,8 +233,9 @@ OrgSchema.statics.forgotPassword = async function (email, portNumber) {
     "KoinoVote - Password reset link",
     "This is the email text body",
     `${getHtmlBody(election, resetUrl, undefined, election?.orgName)}`
-  );
-  return { email: election.email, link: resetUrl };
+  ).then((res) => {
+    return { email: election.email, link: resetUrl };
+  });
 };
 
 // -----------------------STATIC VERIFY RESET LINK METHOD-----------------------
