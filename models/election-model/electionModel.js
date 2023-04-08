@@ -122,7 +122,7 @@ OrgSchema.statics.register = async function (
     election.email
   ).toString("base64")}/${token}`;
 
-  sendEmailWithGoogle(
+  await sendEmailWithGoogle(
     portNumber,
     "smtp.ethereal.email",
     "assanenathaniel@gmail.com",
@@ -131,17 +131,15 @@ OrgSchema.statics.register = async function (
     "Please click on the link below to confirm your email account",
     `${getHtmlBody(election, resetUrl, "Confirm your email acount")}`
     // election.orgName
-  );
-  console.log(
-    "reached end",
-    email,
-    password,
-    orgName,
-    contact,
-    portNumber,
-    election
-  );
-  return election;
+  )
+    .then((res) => {
+      console.log("Email sending suceeded");
+      return election;
+    })
+    .catch((error) => {
+      console.log("Email sending failed");
+      return { error };
+    });
 };
 
 // -------------------STATIC CONFIRM EMAIL METHOD--------------------
