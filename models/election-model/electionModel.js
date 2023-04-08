@@ -133,11 +133,11 @@ OrgSchema.statics.register = async function (
     // election.orgName
   )
     .then((res) => {
-      console.log("Email sending suceeded");
+      console.log("Confirmation email sent");
       return election;
     })
     .catch((error) => {
-      console.log("Email sending failed");
+      console.log("Confirmation email sending failed");
       return { error };
     });
 };
@@ -223,7 +223,7 @@ OrgSchema.statics.forgotPassword = async function (email, portNumber) {
     election.email
   ).toString("base64")}/${token}`;
 
-  sendEmailWithGoogle(
+  await sendEmailWithGoogle(
     portNumber,
     "smtp.ethereal.email",
     "assanenathaniel@gmail.com",
@@ -231,9 +231,15 @@ OrgSchema.statics.forgotPassword = async function (email, portNumber) {
     "KoinoVote - Password reset link",
     "This is the email text body",
     `${getHtmlBody(election, resetUrl, undefined, election?.orgName)}`
-  ).then((res) => {
-    return { email: election.email, link: resetUrl };
-  });
+  )
+    .then((res) => {
+      console.log("Password Reset  email sent");
+      return { email: election.email, link: resetUrl };
+    })
+    .catch((error) => {
+      console.log("Password Reset  email failed");
+      return { error };
+    });
 };
 
 // -----------------------STATIC VERIFY RESET LINK METHOD-----------------------

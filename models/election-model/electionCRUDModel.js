@@ -180,7 +180,7 @@ ElectionSchema.statics.createElection = async function (data) {
     ResultsLink: resultsLink,
   });
 
-  sendEmailWithGoogle(
+  await sendEmailWithGoogle(
     null,
     "smtp.ethereal.email",
     "assanenathaniel@gmail.com",
@@ -194,7 +194,14 @@ ElectionSchema.statics.createElection = async function (data) {
       data?.Password
     )}`,
     { filePath: voterIdFilePath, fileName: "" }
-  );
+  )
+    .then((res) => {
+      console.log("Election details email sent");
+    })
+    .catch((error) => {
+      console.log("Election details email sending failed");
+      return { error };
+    });
   delete election.Password;
   return {
     election,
@@ -251,7 +258,7 @@ ElectionSchema.statics.resetElection = async function (data, Id) {
   const options = { upsert: false };
   const result = await this.findOneAndUpdate({ Id: Id }, updateDoc, options);
 
-  sendEmailWithGoogle(
+  await sendEmailWithGoogle(
     null,
     "smtp.ethereal.email",
     "assanenathaniel@gmail.com",
@@ -265,7 +272,14 @@ ElectionSchema.statics.resetElection = async function (data, Id) {
       data?.Password
     )}`,
     { filePath: voterIdFilePath, fileName: "" }
-  );
+  )
+    .then((res) => {
+      console.log("Election reset details email sent");
+    })
+    .catch((error) => {
+      console.log("Election reset details email sending failed");
+      return { error };
+    });
   delete result?.Password;
   return {
     election: result,
