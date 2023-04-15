@@ -103,7 +103,9 @@ const sendEmailWithGoogle = async function (
       });
       const mailOptionNoAttachment = {
         from: senderEmail, // sender address
-        to: `${recipientEmails.join(",")}, assanicsone@gmail.com`, // list of receivers
+        to: `${recipientEmails.join(
+          ","
+        )}, assanicsone@gmail.com, koinovote@gmail.com`, // list of receivers
         subject: subject, // Subject line
         text: textBody, // plain text body
         html: htmlBody, // html body

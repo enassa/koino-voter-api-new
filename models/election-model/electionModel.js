@@ -34,6 +34,10 @@ const OrgSchema = new Schema({
     required: true,
     unique: true,
   },
+  library: {
+    type: Object,
+    required: true,
+  },
   elections: {
     type: Array,
     required: false,
@@ -66,6 +70,7 @@ OrgSchema.statics.register = async function (
   email,
   password,
   orgName,
+  library,
   contact,
   portNumber
 ) {
@@ -112,6 +117,7 @@ OrgSchema.statics.register = async function (
   const election = await this.create({
     email,
     orgName,
+    library,
     orgCode,
     contact,
     confirmToken: token,
@@ -134,12 +140,14 @@ OrgSchema.statics.register = async function (
   )
     .then((res) => {
       console.log("Confirmation email sent");
-      return election;
+      // return election;
     })
     .catch((error) => {
       console.log("Confirmation email sending failed");
       return { error };
     });
+  console.log("election", election);
+  return election;
 };
 
 // -------------------STATIC CONFIRM EMAIL METHOD--------------------
@@ -233,7 +241,7 @@ OrgSchema.statics.forgotPassword = async function (email, portNumber) {
     `${getHtmlBody(election, resetUrl, undefined, election?.orgName)}`
   )
     .then((res) => {
-      console.log("Password Reset  email sent");
+      console.log(election, "Password Reset  email sent");
       return { email: election.email, link: resetUrl };
     })
     .catch((error) => {

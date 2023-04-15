@@ -2,7 +2,7 @@ const fs = require("fs");
 const Pdfmake = require("pdfmake");
 
 const getHtmlBody = (user, resetUrl, header, name) => `<html><body> 
-<h1 style='color:green'>Koinovote.org - ${header || "Password reset"}</h1>
+<h1 style='color:#5856d6'>Koinovote.org - ${header || "Password reset"}</h1>
 <p > Hi ${name || user.email},</p>
 <p>Please click on the link below to reset your password. Please note that the link will expire in 15 minutes.</p>
 <p'> Reset your password:  ${resetUrl}</p>
