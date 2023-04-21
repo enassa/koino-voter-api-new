@@ -136,6 +136,7 @@ ElectionSchema.statics.createElection = async function (data) {
       "An unsual activity has been detected, Extra security measures have been applied"
     );
   }
+
   // generate election id
   let electionId = generateShortId();
 
@@ -159,6 +160,7 @@ ElectionSchema.statics.createElection = async function (data) {
   )}_${generateSuperShortId()}`;
 
   const voterIdFilePath = await createComplexPdf(data.VoterIds, fileName);
+  console.log("voterIdFilePath", voterIdFilePath);
   // send reset url
   const votingLink = `${clientBaseUrl}/v/vote-login/${Buffer.from(
     organization.orgCode
@@ -180,7 +182,7 @@ ElectionSchema.statics.createElection = async function (data) {
     ResultsLink: resultsLink,
   });
 
-  await sendEmailWithGoogle(
+  const sendEmail = await sendEmailWithGoogle(
     null,
     "smtp.ethereal.email",
     "assanenathaniel@gmail.com",
@@ -194,7 +196,9 @@ ElectionSchema.statics.createElection = async function (data) {
       data?.Password
     )}`,
     { filePath: voterIdFilePath, fileName: "" }
-  )
+  );
+
+  sendEmail
     .then((res) => {
       console.log("Election details email sent");
     })
@@ -202,6 +206,7 @@ ElectionSchema.statics.createElection = async function (data) {
       console.log("Election details email sending failed");
       return { error };
     });
+
   delete election.Password;
   return {
     election,
