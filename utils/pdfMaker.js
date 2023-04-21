@@ -14,7 +14,7 @@ const createComplexPdf = async (
   var fonts = {
     Roboto: {
       normal: __dirname + "/fonts/roboto/Roboto-Regular.ttf",
-      bold: "fonts/roboto/Roboto-Medium.ttf",
+      bold: __dirname + "/fonts/roboto/Roboto-Regular.ttf",
       italics: "fonts/roboto/Roboto-Italic.ttf",
       bolditalics: "fonts/roboto/Roboto-MediumItalic.ttf",
     },
