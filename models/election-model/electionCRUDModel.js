@@ -121,7 +121,7 @@ const ElectionSchema = new Schema({
 
 // ------------------------STATIC SIGNUP METHOD------------------------
 ElectionSchema.statics.createElection = async function (data) {
-  // console.log(data);
+  console.log(data);
   // Validation
   if (!data) {
     throw Error("All fields are required");
@@ -136,7 +136,7 @@ ElectionSchema.statics.createElection = async function (data) {
       "An unsual activity has been detected, Extra security measures have been applied"
     );
   }
-
+  console.log(organization, "organization");
   // generate election id
   let electionId = generateShortId();
 
