@@ -362,7 +362,7 @@ ElectionSchema.statics.castVote = async function (voterData) {
   }
 
   let { voterId, orgCode, electionId, token, Votes } = voterData;
-
+  console.log("voterData", voterData);
   // validate election id and org id
   const election = await this.findOne({
     Id: electionId,
