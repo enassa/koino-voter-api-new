@@ -437,6 +437,7 @@ ElectionSchema.statics.castVote = async function (voterData) {
     }
     return true;
   };
+  // Single vote mode algo
   // const processElection = async () => {
   //   for (var property in Votes) {
   //     console.log("prop and votes", property, Votes[property]);
