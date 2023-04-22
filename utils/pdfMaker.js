@@ -70,11 +70,17 @@ const createComplexPdf = async (
       },
     },
   };
+  const filePath =
+    process.env.NODE_ENV === "production"
+      ? path.resolve(`/tmp/${nameOfFile ?? "filename"}.pdf`)
+      : path.resolve(__dirname + `/pdfs/${nameOfFile ?? "filename"}.pdf`);
 
   pdfDoc = pdfmake.createPdfKitDocument(stylingDocs, {});
-  pdfDoc.pipe(fs.createWriteStream(`/tmp/${nameOfFile ?? "filename"}.pdf`));
+  pdfDoc.pipe(fs.createWriteStream(filePath));
   pdfDoc.end();
-  return path.resolve(`/tmp/${nameOfFile ?? "filename"}.pdf`);
+
+  path.resolve(filePath);
+  return path.resolve(filePath);
 };
 module.exports = {
   createComplexPdf,

@@ -75,6 +75,10 @@ const ElectionSchema = new Schema({
     type: Object,
     required: true,
   },
+  Categories: {
+    type: Object,
+    required: true,
+  },
   ContestantDefinition: {
     type: Object,
     required: true,
