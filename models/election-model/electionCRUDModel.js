@@ -180,6 +180,7 @@ ElectionSchema.statics.createElection = async function (data) {
     token: token,
     VotingLink: votingLink,
     ResultsLink: resultsLink,
+    Closed: false,
   });
 
   const sendEmail = await sendEmailWithGoogle(
@@ -311,8 +312,8 @@ ElectionSchema.statics.verifyVoterId = async function (
       "An unusual activity has been detected, extra security measures have been applied"
     );
   }
-  console.log("closed election", election.Closed);
-  if (election.Closed) {
+  console.log("closed election", election?.Closed);
+  if (election?.Closed) {
     throw Error("This election has been closed");
   }
   //validate token
