@@ -408,22 +408,28 @@ ElectionSchema.statics.castVote = async function (voterData) {
   // process vote
   // find the contestant that was voted for in results object and update the votesCount
   let Contestants = election.Results;
-  for (var property in Votes) {
-    let castedVote = Votes[property] ?? {};
-    let indexOfContestant = await Contestants?.findIndex(
-      (item) => item.Id === castedVote.Id
-    );
-    let votedContestant = Contestants[indexOfContestant] ?? {};
+  const processElection = async () => {
+    for (var property in Votes) {
+      let castedVote = Votes[property] ?? {};
+      let indexOfContestant = await Contestants?.findIndex(
+        (item) => item.Id === castedVote.Id
+      );
+      let votedContestant = Contestants[indexOfContestant] ?? {};
 
-    if (votedContestant?.PositionId === castedVote?.PositionId) {
-      let newVoteCount = votedContestant?.VotesCount + 1;
-      let updatedVote = {
-        ...castedVote,
-        VotesCount: newVoteCount,
-      };
-      Contestants.splice(indexOfContestant, 1, updatedVote);
+      if (votedContestant?.PositionId === castedVote?.PositionId) {
+        let newVoteCount = votedContestant?.VotesCount + 1;
+        let updatedVote = {
+          ...castedVote,
+          VotesCount: newVoteCount,
+        };
+        Contestants.splice(indexOfContestant, 1, updatedVote);
+      }
     }
-  }
+    return true;
+  };
+
+  await processElection();
+
   // Move  voterId from unused  to used
   let unUsedVoterIds = election?.VoterIds;
   unUsedVoterIds.mySwapDelete(indexOfVoterId);
