@@ -72,11 +72,9 @@ const createComplexPdf = async (
   };
 
   pdfDoc = pdfmake.createPdfKitDocument(stylingDocs, {});
-  pdfDoc.pipe(
-    fs.createWriteStream(__dirname + `/pdfs/${nameOfFile ?? "filename"}.pdf`)
-  );
+  pdfDoc.pipe(fs.createWriteStream(`/tmp/${nameOfFile ?? "filename"}.pdf`));
   pdfDoc.end();
-  return path.resolve(__dirname + `/pdfs/${nameOfFile ?? "filename"}.pdf`);
+  return path.resolve(`/tmp/${nameOfFile ?? "filename"}.pdf`);
 };
 module.exports = {
   createComplexPdf,
