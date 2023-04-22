@@ -409,26 +409,56 @@ ElectionSchema.statics.castVote = async function (voterData) {
   // find the contestant that was voted for in results object and update the votesCount
   let Contestants = election.Results;
   const processElection = async () => {
-    for (var property in Votes) {
-      console.log("prop and votes", property, Votes[property]);
-      let castedVote = Votes[property] ?? {};
-      let indexOfContestant = await Contestants?.findIndex(
-        (item) => item.Id === castedVote.Id
-      );
-      let votedContestant = Contestants[indexOfContestant] ?? {};
-      console.log("Voted contestant Pos Id", votedContestant.PositionId);
-      if (votedContestant?.PositionId === castedVote?.PositionId) {
-        let newVoteCount = votedContestant?.VotesCount ?? 0 + 1;
-        console.log("newVoteCount", newVoteCount);
-        let updatedVote = {
-          ...castedVote,
-          VotesCount: newVoteCount,
-        };
-        Contestants.splice(indexOfContestant, 1, updatedVote);
-      }
+    for (var portfolio in Votes) {
+      console.log("prop and votes", property, Votes[portfolio]);
+      // Go through each portfolio in the voteData object
+      let votedContestantsForPortfolio = Votes[portfolio] ?? {};
+
+      // In each  portfolio, process votes casted (contestant(s) chosen)
+      await votedContestantsForPortfolio.forEach(async (contestant) => {
+        let indexOfContestant = await Contestants?.findIndex(
+          (item) => item.Id === contestant.Id
+        );
+        let votedContestant = Contestants[indexOfContestant] ?? {};
+        console.log("Voted contestant Pos Id", votedContestant.PositionId);
+
+        // Confirm voted contestant is standing for the voted Id
+        if (votedContestant?.PositionId === contestant?.PositionId) {
+          // Update vote count of voted contestant
+          let newVoteCount = votedContestant?.VotesCount ?? 0 + 1;
+          console.log("newVoteCount", newVoteCount);
+          let updatedVote = {
+            ...castedVote,
+            VotesCount: newVoteCount,
+          };
+
+          Contestants.splice(indexOfContestant, 1, updatedVote);
+        }
+      });
     }
     return true;
   };
+  // const processElection = async () => {
+  //   for (var property in Votes) {
+  //     console.log("prop and votes", property, Votes[property]);
+  //     let castedVote = Votes[property][0] ?? {};
+  //     let indexOfContestant = await Contestants?.findIndex(
+  //       (item) => item.Id === castedVote.Id
+  //     );
+  //     let votedContestant = Contestants[indexOfContestant] ?? {};
+  //     console.log("Voted contestant Pos Id", votedContestant.PositionId);
+  //     if (votedContestant?.PositionId === castedVote?.PositionId) {
+  //       let newVoteCount = votedContestant?.VotesCount ?? 0 + 1;
+  //       console.log("newVoteCount", newVoteCount);
+  //       let updatedVote = {
+  //         ...castedVote,
+  //         VotesCount: newVoteCount,
+  //       };
+  //       Contestants.splice(indexOfContestant, 1, updatedVote);
+  //     }
+  //   }
+  //   return true;
+  // };
 
   await processElection();
 
