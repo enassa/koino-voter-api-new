@@ -410,7 +410,7 @@ ElectionSchema.statics.castVote = async function (voterData) {
   let Contestants = election.Results;
   const processElection = async () => {
     for (var portfolio in Votes) {
-      console.log("prop and votes", property, Votes[portfolio]);
+      console.log("prop and votes", portfolio, Votes[portfolio]);
       // Go through each portfolio in the voteData object
       let votedContestantsForPortfolio = Votes[portfolio] ?? {};
 
