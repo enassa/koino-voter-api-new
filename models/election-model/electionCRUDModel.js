@@ -196,15 +196,13 @@ ElectionSchema.statics.createElection = async function (data) {
       data?.Password
     )}`,
     { filePath: voterIdFilePath, fileName: "" }
-  );
-
-  sendEmail
+  )
     .then((res) => {
       console.log("Election details email sent");
     })
     .catch((error) => {
       console.log("Election details email sending failed");
-      return { error };
+      return { error: error + " sssss" };
     });
 
   delete election.Password;
