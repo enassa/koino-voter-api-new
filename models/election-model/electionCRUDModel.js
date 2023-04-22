@@ -416,7 +416,7 @@ ElectionSchema.statics.castVote = async function (voterData) {
         (item) => item.Id === castedVote.Id
       );
       let votedContestant = Contestants[indexOfContestant] ?? {};
-
+      console.log("Voted contestant", votedContestant);
       if (votedContestant?.PositionId === castedVote?.PositionId) {
         let newVoteCount = votedContestant?.VotesCount + 1;
         let updatedVote = {
