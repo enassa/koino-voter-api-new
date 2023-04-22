@@ -410,7 +410,7 @@ ElectionSchema.statics.castVote = async function (voterData) {
   let Contestants = election.Results;
   const processElection = async () => {
     for (var property in Votes) {
-      console.log("prop and votes", property, Votes);
+      console.log("prop and votes", property, Votes[property]);
       let castedVote = Votes[property] ?? {};
       let indexOfContestant = await Contestants?.findIndex(
         (item) => item.Id === castedVote.Id
