@@ -410,7 +410,6 @@ ElectionSchema.statics.castVote = async function (voterData) {
   let Contestants = election.Results;
   const processElection = async () => {
     for (var portfolio in Votes) {
-      console.log("prop and votes", portfolio, Votes[portfolio]);
       // Go through each portfolio in the voteData object
       let votedContestantsForPortfolio = Votes[portfolio] ?? {};
 
@@ -420,12 +419,12 @@ ElectionSchema.statics.castVote = async function (voterData) {
           (item) => item.Id === contestant.Id
         );
         let votedContestant = Contestants[indexOfContestant] ?? {};
-        console.log("Voted contestant Pos Id", votedContestant.PositionId);
 
         // Confirm voted contestant is standing for the voted Id
         if (votedContestant?.PositionId === contestant?.PositionId) {
           // Update vote count of voted contestant
-          let newVoteCount = votedContestant?.VotesCount ?? 0 + 1;
+          console.log("old count", votedContestant?.VotesCount);
+          let newVoteCount = (votedContestant?.VotesCount ?? 0) + 1;
           console.log("newVoteCount", newVoteCount);
           let updatedVote = {
             ...contestant,
