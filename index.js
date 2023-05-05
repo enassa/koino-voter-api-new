@@ -39,7 +39,7 @@ app.use(
 );
 // Middle ware
 app.use(express.json());
-
+app.use(bodyParser.json({ limit: "5mb" }));
 // INITIALIZE ROUTES
 app.use("/api/election", organizationRoutes);
 app.use("/api/elections", electionRoutes);

@@ -45,6 +45,7 @@ app.use("/api/election", organizationRoutes);
 app.use("/api/elections", electionRoutes);
 app.use("/api/user", userRoutes);
 
+app.use(bodyParser.json({ limit: "5mb" }));
 app.get("/", (req, res) => {
   res.sendFile("./views/home.html", { root: __dirname });
 });
